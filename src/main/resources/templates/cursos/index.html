@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cursos</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min-cosmo.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="min-h-100vh">
+
+    <div class="container section">
+        <h3>Lista de cursos</h3>
+
+        <div class="text-end">
+            <a href="/cursos/nuevo" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Nuevo curso
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <form action="" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" name="titulo" id="titulo" class="form-control"
+                            placeholder="Buscar curso por nombre" th:value="${param.titulo}"><button class="btn btn-primary ">Buscar</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+        <div th:if="${msgExito ne null}" class="alert alert-success mt-3">
+            [[${msgExito}]]
+        </div>
+
+        <table class="table table-hover mt-5">
+            <thead>
+                <tr>
+                    <th>TITULO</th>
+                    <th>PRECIO</th>
+                    <th>FECHA INICIO</th>
+                    <th>FECHA CREACION</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="curso : ${cursos}" th:object="${curso}">
+                    <td>
+                        <div>[[*{titulo}]]</div>
+                        <small>[[*{descripcion}]]</small>
+                    </td>
+                    <td th:text="*{#numbers.formatDecimal(precio,1,'COMMA',2,'POINT')}"></td>
+                    <td th:text="*{#temporals.format(fechaInicio, 'dd/MM/yyyy')}"></td>
+                    <td th:text="*{#temporals.format(fechaCreacion, 'dd/MM/yyyy hh:mm a')}"></td>
+                    <td>
+                        <div class="btn btn-group btn-group-sm">
+                            <a th:href="@{/cursos/{id}/editar(id=*{id})}" title="Editar" class="btn btn-primary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <a href="javascript:void(0)" onclick="eliminarCurso(this)" title="Eliminar"
+                                class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <form th:action="@{/cursos/{id}/eliminar(id=*{id})}" method="post">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function eliminarCurso(element) {
+            console.log('elemento', element);
+
+            var ok = confirm('¿Está seguro de eliminar el curso?');
+
+            if (ok) {
+                element.nextElementSibling.submit();
+            }
+        }
+    </script>
+
+    <script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+</body>
+
+</html>

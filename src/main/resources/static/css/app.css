@@ -1,0 +1,111 @@
+body {
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.banner {
+    min-height: 500px;
+    background-size: cover;
+    position:relative;
+    z-index:-2;
+}
+.banner .overlay {
+    background-color: #1a093375;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+.banner video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.max-w-100px {
+    max-width: 100px;
+}
+
+.max-w-150 {
+    max-width: 360px;
+}
+
+.max-w-200 {
+    max-width: 360px;
+}
+
+.max-w-250 {
+    max-width: 360px;
+}
+
+.max-w-300 {
+    max-width: 360px;
+}
+
+.max-w-350 {
+    max-width: 360px;
+}
+
+.mt-5r {
+    margin-top: 5rem !important;
+}
+
+.mt-6r {
+    margin-top: 6rem !important;
+}
+
+.mt-10r {
+    margin-top: 10rem !important;
+}
+
+.mb-15r {
+    margin-bottom: 15rem !important;
+}
+
+.mb-20r {
+    margin-bottom: 20rem !important;
+}
+
+.my-10r {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+}
+
+.my-15r {
+    margin-top: 15rem !important;
+    margin-bottom: 15rem !important;
+}
+
+.my-20r {
+    margin-top: 20rem !important;
+    margin-bottom: 20rem !important;
+}
+
+.min-h-100vh {
+    min-height: 100vh;
+}
+
+.navbar .dropdown.auth .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+}
+
+.section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}

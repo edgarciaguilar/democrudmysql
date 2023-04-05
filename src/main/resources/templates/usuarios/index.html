@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min-cosmo.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="min-h-100vh">
+    
+    
+    <div class="container section">
+        <h3>Administrador de Usuarios</h3>
+
+        <div class="text-end"><a href="usuarios/nuevo" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo usuario</a></div>
+        
+
+        <table class="table table-hover mt-5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre Completo</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Rol</th>
+                    <th>Miembro desde</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" usuario: ${usuarios}" th:object="${usuario}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{nombreCompleto}"></td>
+                    <td th:text="*{email}"></td>
+                    <td th:text="*{password}"></td>
+                    <td th:text="*{rol}"></td>
+                    <td th:text="*{fechaCreacion}"></td>
+                    <td>
+                        <div class="btn btn-group btn-group-sm">
+                            <a th:href="@{/usuarios/{id}/editar(id=*{id})}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="javascript:void(0)" onclick="eliminarUsuario(this)" title="Eliminar" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <form th:action="@{/usuarios/{id}/eliminar(id=*{id})}" method="post"></form>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        function eliminarUsuario(element) {
+            console.log('elemento', element);
+    
+            var ok = confirm('¿Está seguro de eliminar el usuario?');
+    
+            if (ok) {
+                element.nextElementSibling.submit();
+            }
+        }
+    </script>
+    <script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    
+</body>
+</html>
