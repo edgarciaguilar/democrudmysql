@@ -10,6 +10,7 @@ Lo que ocupé para este primera versión del proyecto es lo siguiente:
  4. Thymeleaf
  5. Visual Studio Code 1.7
  6. MySQL
+ 7. JPA
 
 >La ventana de Cursos con la ventana de búsqueda
 >
