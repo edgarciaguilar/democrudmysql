@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CursoOnLine</title>
+  <link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min-cosmo.css}">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="min-h-100vh">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">CursosOnLine</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Cursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/cursos">Admin Cursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/usuarios">Admin Usuarios</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div layout:fragment="contenido_personalizado"></div>
+
+  </script>
+  <script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <div layout:fragment="scripts" th:remove>
+  </div>
+</body>
+
+</html>

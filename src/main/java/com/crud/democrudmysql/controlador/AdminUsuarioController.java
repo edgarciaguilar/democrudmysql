@@ -15,38 +15,38 @@ import com.crud.democrudmysql.modelo.Usuario;
 import com.crud.democrudmysql.repository.UsuarioRepository;
 
 @Controller
-public class UsuarioController {
+public class AdminUsuarioController {
     
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/usuarios") 
+    @GetMapping("/admin/usuarios") 
     public String index(Model model) {
         List<Usuario> usuarios = usuarioRepository.findAll();
         model.addAttribute("usuarios", usuarios);
         return "usuarios/index";
     }
 
-    @GetMapping("/usuarios/nuevo") 
+    @GetMapping("/admin/usuarios/nuevo") 
     public String nuevo(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuarios/form-usuarios";
     }
 
-    @PostMapping("/usuarios/nuevo")
+    @PostMapping("/admin/usuarios/nuevo")
     public String crearUsuario(@ModelAttribute Usuario usuario) {
         usuarioRepository.save(usuario);
         return "redirect:/usuarios";
     }
 
-    @GetMapping("/usuarios/{id}/editar") 
+    @GetMapping("/admin/usuarios/{id}/editar") 
     public String editar(@PathVariable Integer id, Model model) {
         Usuario usuario= usuarioRepository.findById(id).get();
         model.addAttribute("usuario", usuario);
         return "usuarios/form-usuarios";
     }
 
-    @PostMapping("/usuarios/{id}/editar") 
+    @PostMapping("/admin/usuarios/{id}/editar") 
     public String actualizar(@PathVariable Integer id, @ModelAttribute Usuario usuario) {
         Usuario usuario2 = usuarioRepository.findById(id).get();
         usuario2.setNombres(usuario.getNombres());
@@ -59,7 +59,7 @@ public class UsuarioController {
         return "redirect:/usuarios";
     }
 
-    @PostMapping("/usuarios/{id}/eliminar") 
+    @PostMapping("/admin/usuarios/{id}/eliminar") 
     public String eliminar(@PathVariable Integer id, RedirectAttributes ra) {
         Usuario usuarioDB = usuarioRepository.findById(id).get();
         usuarioRepository.delete(usuarioDB);
