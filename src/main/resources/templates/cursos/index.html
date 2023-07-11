@@ -49,9 +49,16 @@
             </thead>
             <tbody>
                 <tr th:each="curso : ${cursosPage.content}" th:object="${curso}">
-                    <td>
-                        <div>[[*{titulo}]]</div>
-                        <small>[[*{descripcion}]]</small>
+                    <td class="max-w-350">
+                        <div class="d-flex gap-3">
+                            <a th:href="@{/media/{ri}(ri=*{rutaImagen})}" data-fancybox>
+                                <img th:src="@{/media/{ri}(ri=*{rutaImagen})}" alt="" width="120" class="rounded">
+                            </a>
+                            <div>
+                                <div class="fs-bold fs-5">[[*{titulo}]]</div>
+                                <small>[[*{descripcion}]]</small>
+                            </div>
+                        </div>
                     </td>
                     <td th:text="*{#numbers.formatDecimal(precio,1,'COMMA',2,'POINT')}"></td>
                     <td th:text="*{#temporals.format(fechaInicio, 'dd/MM/yyyy')}"></td>

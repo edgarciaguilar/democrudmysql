@@ -57,6 +57,9 @@ public class AdminCursoController {
 
     @PostMapping("/nuevo")
     String crear(@ModelAttribute @Validated Curso curso, BindingResult bindingResult, RedirectAttributes ra, Model model) {
+        if(curso.getImagen().isEmpty()) {
+            bindingResult.rejectValue("imagen", "MultipartNotEmpty");
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("curso", curso);
             return "cursos/formulario";
@@ -76,7 +79,10 @@ public class AdminCursoController {
     }
 
     @PostMapping("/{id}/editar")
+
+    
     public String actualizar(@PathVariable Integer id, @ModelAttribute @Validated Curso curso, BindingResult bindingResult, RedirectAttributes ra, Model model) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("curso", curso);
             return "cursos/formulario";
@@ -86,6 +92,11 @@ public class AdminCursoController {
         cursoFromDb.setDescripcion(curso.getDescripcion());
         cursoFromDb.setPrecio(curso.getPrecio());
         cursoFromDb.setFechaInicio(curso.getFechaInicio());
+
+        if(!curso.getImagen().isEmpty()){
+            String rutaImagen = storageService.store(curso.getImagen());
+            cursoFromDb.setRutaImagen(rutaImagen);
+        }
         cursoRepository.save(cursoFromDb);
         ra.addFlashAttribute("msgExito","El curso se ha modificado exitosamente");
         return "redirect:/admin/cursos";
@@ -94,6 +105,7 @@ public class AdminCursoController {
     @PostMapping("/{id}/eliminar")
     public String eliminar(@PathVariable Integer id, RedirectAttributes ra) {
         Curso cursoFromDb = cursoRepository.findById(id).get();
+        storageService.delete(cursoFromDb.getRutaImagen());
         cursoRepository.delete(cursoFromDb);
         ra.addFlashAttribute("msgExito","El curso se ha eliminado"); 
         return "redirect:/admin/cursos";

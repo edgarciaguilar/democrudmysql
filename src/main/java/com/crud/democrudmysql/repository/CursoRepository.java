@@ -13,5 +13,8 @@ import com.crud.democrudmysql.modelo.Curso;
 public interface CursoRepository extends JpaRepository<Curso,Integer>{
     
     List<Curso> findByTitulo(String t);
+    
     Page<Curso> findByTituloContaining(String t, Pageable p);
+
+    List<Curso> findFirst8ByOrderByFechaCreacionDesc();
 }

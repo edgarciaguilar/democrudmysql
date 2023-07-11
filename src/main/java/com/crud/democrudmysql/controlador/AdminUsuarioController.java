@@ -56,14 +56,14 @@ public class AdminUsuarioController {
         usuario2.setPassword(usuario.getPassword());
         //usuario2.setFechaCreacion(usuario.getFechaCreacion());
         usuarioRepository.save(usuario2);
-        return "redirect:/usuarios";
+        return "redirect:/admin/usuarios";
     }
 
     @PostMapping("/admin/usuarios/{id}/eliminar") 
     public String eliminar(@PathVariable Integer id, RedirectAttributes ra) {
         Usuario usuarioDB = usuarioRepository.findById(id).get();
         usuarioRepository.delete(usuarioDB);
-        return "redirect:/usuarios";
+        return "redirect:/admin/usuarios";
     }
 
     
