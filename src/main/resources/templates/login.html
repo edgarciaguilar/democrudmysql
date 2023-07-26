@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{base.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    
+</head>
+
+<body>
+
+    <div class="container section" layout:fragment="contenido_personalizado">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-jg-8 col-xl-4">
+          <h3>Inicio de sesión</h3>
+
+          <div th:if="${param.error}" class="alert alert-danger my-3">Datos incorrectos</div>
+          <div th:if="${param.registroExitoso}" class="alert alert-success my-3">El usuario se registro exitosamente, ahora puede iniciar sesión</div>
+          <form th:action="@{''}" method="post">
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="email" name="username" id="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="mb-3">
+              <label for="contrasena">Contraseña</label>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="mb-5 form-check">
+              <input type="checkbox" id="rememberMe" class="form-check-input" name="remember-me">
+              <label for="rememberMe" class="form-check-label">Recordarme</label>
+            </div>
+            <button class="btn btn-primary btn-lg w-100">Ingresar</button>
+          </form>
+        </div>
+      </div> 
+
+        
+    </div>
+</body>
+
+</html>

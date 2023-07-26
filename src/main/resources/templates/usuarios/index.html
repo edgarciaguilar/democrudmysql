@@ -65,13 +65,13 @@
                     <td th:text="*{fechaCreacion}"></td>
                     <td>
                         <div class="btn btn-group btn-group-sm">
-                            <a th:href="@{/usuarios/{id}/editar(id=*{id})}">
+                            <a th:href="@{/admin/usuarios/{id}/editar(id=*{id})}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="javascript:void(0)" onclick="eliminarUsuario(this)" title="Eliminar" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
-                            <form th:action="@{/usuarios/{id}/eliminar(id=*{id})}" method="post"></form>
+                            <form th:action="@{/admin/usuarios/{id}/eliminar(id=*{id})}" method="post"></form>
                         </div>
                     </td>
 

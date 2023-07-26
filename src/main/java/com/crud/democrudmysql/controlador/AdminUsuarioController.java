@@ -36,7 +36,7 @@ public class AdminUsuarioController {
     @PostMapping("/admin/usuarios/nuevo")
     public String crearUsuario(@ModelAttribute Usuario usuario) {
         usuarioRepository.save(usuario);
-        return "redirect:/usuarios";
+        return "redirect:admin/usuarios";
     }
 
     @GetMapping("/admin/usuarios/{id}/editar") 
@@ -65,7 +65,5 @@ public class AdminUsuarioController {
         usuarioRepository.delete(usuarioDB);
         return "redirect:/admin/usuarios";
     }
-
-    
 
 }

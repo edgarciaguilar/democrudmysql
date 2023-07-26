@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{base.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[${curso.titulo}]]</title>
+    
+</head>
+
+<body>
+
+    <div class="container section" layout:fragment="contenido_personalizado" th:object="${curso}">
+        
+      <div class="row">
+        <div class="col-md-6">
+          <img th:src="@{/media/{ri}(ri=*{rutaImagen})}" class="rounded w-100" th:alt="*{titulo}">
+        </div>
+
+        <div class="col-md-6">
+          <h3 class="mb-3">[[*{titulo}]]</h3>  
+          <p>
+            [[*{descripcion}]]
+          </p>
+          <div class="mb-3 mt-5">
+            Inicio [[*{#temporals.format(fechaInicio,'dd ''de'' MMMM')}]]
+          </div>
+          <div> Precio:
+            <div class="text-danger fw-bold fs-3">
+              $[[*{#numbers.formatDecimal(precio,1, 'COMMA', 2, 'POINT')}]]
+            </div> 
+          </div>
+          <form th:action="@{/usuario/inscribir?c={idCurso}(idCurso=*{id})}" method="post">
+            <button class="btn btn-secondary btn-lg mt-4"> <i class="fa fa-rocket"></i> Inscribirme</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+</body>
+
+</html>

@@ -28,7 +28,7 @@ public class MediaController {
 
     @GetMapping("/{filename}")
     ResponseEntity<Resource> index(@PathVariable String filename) throws IOException{
-        log.info("index {}",filename);
+        //log.info("index {}",filename);
         Resource resource = storageService.loadAsResource(filename);
         String contentType = Files.probeContentType(resource.getFile().toPath());
 
