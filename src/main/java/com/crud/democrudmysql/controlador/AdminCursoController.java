@@ -3,6 +3,8 @@ package com.crud.democrudmysql.controlador;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -73,7 +75,7 @@ public class AdminCursoController {
 
     @GetMapping("/{id}/editar")
     public String editar(@PathVariable Integer id, Model model) {
-        Curso curso = cursoRepository.findById(id).get();
+        Curso curso = cursoRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         model.addAttribute("curso", curso);
         return "cursos/formulario";
     }
@@ -87,7 +89,7 @@ public class AdminCursoController {
             model.addAttribute("curso", curso);
             return "cursos/formulario";
         }
-        Curso cursoFromDb = cursoRepository.findById(id).get();
+        Curso cursoFromDb = cursoRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         cursoFromDb.setTitulo(curso.getTitulo());
         cursoFromDb.setDescripcion(curso.getDescripcion());
         cursoFromDb.setPrecio(curso.getPrecio());
@@ -104,7 +106,7 @@ public class AdminCursoController {
 
     @PostMapping("/{id}/eliminar")
     public String eliminar(@PathVariable Integer id, RedirectAttributes ra) {
-        Curso cursoFromDb = cursoRepository.findById(id).get();
+        Curso cursoFromDb = cursoRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         storageService.delete(cursoFromDb.getRutaImagen());
         cursoRepository.delete(cursoFromDb);
         ra.addFlashAttribute("msgExito","El curso se ha eliminado"); 

@@ -3,6 +3,8 @@ package com.crud.democrudmysql.controlador;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +36,8 @@ public class UsuarioController {
     @PostMapping("inscribir")
     String inscribir(@RequestParam("c") Integer idCurso, Principal principal) {
 
-        Curso curso = cursoRepository.findById(idCurso).get();
-        Usuario usuario = usuarioRepository.findByEmail(principal.getName()).get();
+        Curso curso = cursoRepository.findById(idCurso).orElseThrow(EntityNotFoundException::new);
+        Usuario usuario = usuarioRepository.findByEmail(principal.getName()).orElseThrow(EntityNotFoundException::new);
 
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setUsuario(usuario);

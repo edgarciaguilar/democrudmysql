@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <h3>[[${usuario.id ne null ? 'Editar' : 'Nuevo'}]] usuario</h3>
-                <form action="" method="post" th:object="${usuario}" class="mt-3">
+                <form th:action="@{''}" method="post" th:object="${usuario}" class="mt-3">
                     <div class="mb-3">
                         <label for="nombres">Nombre(s):</label>
                         <input type="text" name="nombres" id="nombres" th:field="*{nombres}" class="form-control">

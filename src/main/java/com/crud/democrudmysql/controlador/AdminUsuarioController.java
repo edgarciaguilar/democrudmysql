@@ -2,9 +2,12 @@ package com.crud.democrudmysql.controlador;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,21 +37,21 @@ public class AdminUsuarioController {
     }
 
     @PostMapping("/admin/usuarios/nuevo")
-    public String crearUsuario(@ModelAttribute Usuario usuario) {
+    public String crearUsuario(@ModelAttribute @Validated Usuario usuario) {
         usuarioRepository.save(usuario);
         return "redirect:admin/usuarios";
     }
 
     @GetMapping("/admin/usuarios/{id}/editar") 
     public String editar(@PathVariable Integer id, Model model) {
-        Usuario usuario= usuarioRepository.findById(id).get();
+        Usuario usuario= usuarioRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         model.addAttribute("usuario", usuario);
         return "usuarios/form-usuarios";
     }
 
     @PostMapping("/admin/usuarios/{id}/editar") 
     public String actualizar(@PathVariable Integer id, @ModelAttribute Usuario usuario) {
-        Usuario usuario2 = usuarioRepository.findById(id).get();
+        Usuario usuario2 = usuarioRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         usuario2.setNombres(usuario.getNombres());
         usuario2.setApellidos(usuario.getApellidos());
         usuario2.setEmail(usuario.getEmail());
@@ -61,7 +64,7 @@ public class AdminUsuarioController {
 
     @PostMapping("/admin/usuarios/{id}/eliminar") 
     public String eliminar(@PathVariable Integer id, RedirectAttributes ra) {
-        Usuario usuarioDB = usuarioRepository.findById(id).get();
+        Usuario usuarioDB = usuarioRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         usuarioRepository.delete(usuarioDB);
         return "redirect:/admin/usuarios";
     }
