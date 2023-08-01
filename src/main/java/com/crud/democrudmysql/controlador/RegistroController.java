@@ -42,8 +42,8 @@ public class RegistroController {
         }
 
         if(!usuario.getPassword1().equals(usuario.getPassword2())) {
-            bindingResult.rejectValue("password1", "PasswordNotEquals");
-        }
+             bindingResult.rejectValue("password1", "PasswordNotEquals");
+         }
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("registro").addObject("usuario", usuario);

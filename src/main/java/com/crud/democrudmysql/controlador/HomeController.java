@@ -28,9 +28,9 @@ public class HomeController {
 
     @GetMapping
     public String index(Model model) {
-        if(true) {
-            throw new RuntimeException("este es un ejemplo de una excepcion lanzada intencionalmente");
-        }
+        // if(true) {
+        //     throw new RuntimeException("este es un ejemplo de una excepcion lanzada intencionalmente");
+        // }
         List<Curso> ultimosCursos = cursoRepository.findFirst8ByOrderByFechaCreacionDesc();
         model.addAttribute("ultimosCursos", ultimosCursos);
         return "index";

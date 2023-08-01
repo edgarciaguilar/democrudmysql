@@ -20,8 +20,13 @@ import com.crud.democrudmysql.repository.UsuarioRepository;
 @Controller
 public class AdminUsuarioController {
     
-    @Autowired
+    
     private UsuarioRepository usuarioRepository;
+
+    public AdminUsuarioController(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+
+    }
 
     @GetMapping("/admin/usuarios") 
     public String index(Model model) {
